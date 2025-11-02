@@ -32,6 +32,8 @@ public class Knn {
           mapaDasDistancias.sort((a,b)->{
            return Double.compare(a.primeiro,b.primeiro);
           });
+        System.out.println("distancias ordenadas "+mapaDasDistancias);
+
         ArrayList<Par<Double,String>> visinhos=new ArrayList();
         for(int i=0;i<kVisinhos;i++){
           visinhos.add(mapaDasDistancias.get(i));
@@ -43,27 +45,23 @@ public class Knn {
     }
 
     private String contagem(ArrayList<Par<Double,String>>visinhos){
+        System.out.println(visinhos);
         var listaDeContados=new LinkedList<String>();
         var listaContagenDosLAbels=new ArrayList<Par<Integer,String>>();
-        int inicio=0;
-        int fin=visinhos.size()-1;
+
         var contagen=0;
-        var labbel=visinhos.get(inicio);
-        while (inicio!=fin) {
-            System.out.println("procurando os visinhos prosimos");
-            if (!listaDeContados.contains(labbel.segundo)){
-                for (int i = fin; i> inicio; i--) {
-                    System.out.println("contando label");
-                    if (visinhos.get(fin).segundo == labbel.segundo) contagen++;
-                }
-                listaContagenDosLAbels.add(new Par<>(contagen,labbel.segundo));
-                listaDeContados.add(labbel.segundo);
-        }
-          inicio++;
-          fin=visinhos.size()-1;
-          contagen=0;
-          labbel=visinhos.get(inicio);
-        }
+        var labbel=visinhos.get(0);
+       for(int i=0;i<visinhos.size();i++){
+           labbel=visinhos.get(i);
+           if(!listaDeContados.contains(labbel.segundo)){
+               for(int i2=0;i2<visinhos.size();i2++){
+                   if(visinhos.get(i2).segundo.equals(labbel.segundo))contagen++;
+               }
+               listaDeContados.add(labbel.segundo);
+               listaContagenDosLAbels.add(new Par(contagen,labbel.segundo));
+           }
+        contagen=0;
+       }
         listaContagenDosLAbels.sort((a,b)->{return Integer.compare(a.primeiro,b.primeiro);});
         return listaContagenDosLAbels.get(listaContagenDosLAbels.size()-1).segundo;
     }

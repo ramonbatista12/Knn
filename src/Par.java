@@ -6,5 +6,8 @@ public class Par <P,S> {
 
     public P primeiro;
     public S segundo;
-
+@Override
+public String toString(){
+    return "Primeiro : "+primeiro+" segundo : "+segundo;
+}
 }

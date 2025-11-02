@@ -21,14 +21,14 @@ public class Main {
         double[][] testes = {
                 {160, 8},  // deve ser Maçã
                 {290, 4},  // deve ser Laranja
-                {200, 6},  // deve ser Laranja
+                {200, 6},  // deve ser Maçá
                 {140, 7}   // deve ser Maçã
         };
         var knn = new Knn();
         for(int i=0;i<testes.length;i++){
             System.out.println("Ola vou clasificar uma nova fruta com os sequintes valores peso "+testes[i][0]+" docura "+testes[i][1]);
 
-            var clasificacao =knn.clasificao(valoresConhecidos,label,testes[i],3);
+            var clasificacao =knn.clasificao(valoresConhecidos,label,testes[i],5);
             System.out.println("A fruta foi clasificada como "+clasificacao);
         }
 
